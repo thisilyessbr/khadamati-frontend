@@ -1,0 +1,44 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background: #f5f5f5;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 1.5rem;
+
+  mat-card-header {
+    margin-bottom: 1.5rem;
+    display: block;
+    text-align: center;
+  }
+
+  mat-card-title   { font-size: 22px; }
+  mat-card-subtitle { margin-top: 4px; }
+}
+
+.full-width   { width: 100%; }
+
+.submit-btn {
+  height: 44px;
+  margin-top: 0.5rem;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.server-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  margin-bottom: 0.75rem;
+
+  mat-icon { font-size: 16px; height: 16px; width: 16px; }
+}

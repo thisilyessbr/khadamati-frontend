@@ -1,0 +1,54 @@
+import { Injectable } from '@angular/core';
+import {BehaviorSubject, catchError, EMPTY, tap} from 'rxjs';
+import {AuthControllerService} from '../../src/app/core/api';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthFacadeService {
+
+  private accessToken: string | null = null;
+
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this._isLoggedIn$.asObservable();
+
+  constructor(private authApi: AuthControllerService) {
+    this.refresh().subscribe();
+  }
+
+  login(email: string , password: string){
+    return this.authApi.login({ username: email , password}).pipe(
+      tap( res => {
+        this.accessToken = res.accessToken!;
+        this._isLoggedIn$.next(true);
+      })
+    )
+
+  }
+
+  refresh() {
+
+    return this.authApi.refresh().pipe(
+      tap(res => {
+        this.accessToken = res.accessToken!;
+        this._isLoggedIn$.next(true);
+      }),
+      catchError(() => {
+        this.accessToken = null;
+        this._isLoggedIn$.next(false);
+        return EMPTY;
+      })
+    );
+  }
+
+  logout() {
+    return this.authApi.logout().pipe(
+      tap(() => {
+        this.accessToken = null;
+        this._isLoggedIn$.next(false);
+      })
+    );
+  }
+
+  getAccessToken() { return this.accessToken; }
+}
