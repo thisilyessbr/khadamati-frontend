@@ -1,5 +1,5 @@
 import { HttpParams, HttpParameterCodec } from '@angular/common/http';
-import {CustomHttpParameterCodec, IdentityHttpParameterCodec} from '@api/encoder';
+import { CustomHttpParameterCodec, IdentityHttpParameterCodec } from './encoder';
 
 export enum QueryParamStyle {
     Json,

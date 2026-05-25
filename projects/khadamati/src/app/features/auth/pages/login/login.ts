@@ -48,7 +48,7 @@ export class Login {
     this.errorMsg = '';
     const { username, password } = this.form.getRawValue();
     this.auth.login({ username: username!, password: password! }).subscribe({
-      next:  ()  => this.router.navigate(['/dashboard']),
+      next:  ()  => this.router.navigate(['/services']),
       error: err => {
         this.errorMsg = err.error?.message ?? 'Invalid credentials';
         this.loading  = false;

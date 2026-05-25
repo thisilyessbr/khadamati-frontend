@@ -2,6 +2,18 @@
   "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
   "spaces": 2,
   "generator-cli": {
-    "version": "7.22.0"
+    "version": "7.22.0",
+    "generators": {
+      "khadamati": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "http://localhost:8080/v3/api-docs",
+        "output": "projects/khadamati/src/app/api",
+        "additionalProperties": {
+          "ngVersion": "19",
+          "providedIn": "root",
+          "withInterfaces": true
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,151 @@
+.services-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+// ── Header ───────────────────────────────────────────────
+.page-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin: 0 0 0.25rem;
+  }
+
+  .subtitle {
+    color: var(--mat-sys-on-surface-variant);
+    margin: 0;
+  }
+}
+
+// ── Filters ──────────────────────────────────────────────
+.filters-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .filter-category { width: 220px; }
+  .filter-city     { width: 200px; }
+}
+
+// ── Grid ─────────────────────────────────────────────────
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+// ── Card ─────────────────────────────────────────────────
+.service-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-image {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  mat-card-content {
+    flex: 1;
+    padding-top: 1rem;
+  }
+
+  .card-category {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--mat-sys-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+
+    mat-icon {
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+    line-height: 1.4;
+  }
+
+  .card-description {
+    font-size: 0.875rem;
+    color: var(--mat-sys-on-surface-variant);
+    margin: 0 0 1rem;
+
+    // Clamp to 2 lines with ellipsis
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--mat-sys-on-surface-variant);
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .card-budget {
+      font-weight: 500;
+      color: var(--mat-sys-primary);
+    }
+  }
+
+  mat-card-actions {
+    padding: 0.75rem 1rem 1rem;
+
+    .full-width { width: 100%; }
+  }
+}
+
+// ── Empty / Error / Loading states ───────────────────────
+.state-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  gap: 1rem;
+  color: var(--mat-sys-on-surface-variant);
+
+  p { margin: 0; }
+
+  .state-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+
+    &.error { color: var(--mat-sys-error); }
+  }
+}

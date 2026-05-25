@@ -16,7 +16,19 @@ export class AuthFacade {
   ) {}
 
   getAccessToken(): string | null {
-    return localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token');
+
+    if(!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiresAt = payload.exp * 1000;
+      const bufferMs = 30_000;
+      if (Date.now() >= expiresAt - bufferMs) return null;
+      return token;
+    }catch {
+      return null;
+    }
   }
 
   login(credentials: LoginRequestDTO): Observable<LoginResponseDTO> {

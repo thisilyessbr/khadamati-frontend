@@ -1,0 +1,112 @@
+<div class="services-page">
+
+
+  <div class="page-header">
+    <h1>Browse Services</h1>
+    <p class="subtitle">Find the right professional for your needs</p>
+  </div>
+
+
+  <div class="filters-bar">
+
+    <mat-form-field appearance="outline" class="filter-category">
+      <mat-label>Category</mat-label>
+      <mat-icon matPrefix>category</mat-icon>
+      <mat-select [formControl]="categoryControl">
+        <mat-option [value]="null">All categories</mat-option>
+        @for (cat of categories; track cat) {
+          <mat-option [value]="cat">{{ formatCategory(cat) }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-city">
+      <mat-label>City</mat-label>
+      <mat-icon matPrefix>location_on</mat-icon>
+      <input matInput [formControl]="cityControl" placeholder="e.g. Casablanca" autocomplete="off" />
+    </mat-form-field>
+
+    @if (categoryControl.value || cityControl.value) {
+      <button mat-stroked-button (click)="clearFilters()">
+        <mat-icon>close</mat-icon> Clear filters
+      </button>
+    }
+
+  </div>
+
+  <p>Count: {{ services.length }} | Loading: {{ loading }} | Error: {{ errorMsg }}</p>
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="state-center">
+      <mat-spinner diameter="48" />
+    </div>
+  }
+
+  <!-- Error -->
+  @if (!loading && errorMsg) {
+    <div class="state-center">
+      <mat-icon class="state-icon error">error_outline</mat-icon>
+      <p>{{ errorMsg }}</p>
+      <button mat-stroked-button (click)="load()">
+        <mat-icon>refresh</mat-icon> Try again
+      </button>
+    </div>
+  }
+
+  <!-- Empty -->
+  @if (!loading && !errorMsg && services.length === 0) {
+    <div class="state-center">
+      <mat-icon class="state-icon">search_off</mat-icon>
+      <p>No services found. Try adjusting your filters.</p>
+    </div>
+  }
+
+  <!-- Grid -->
+  @if (!loading && !errorMsg && services.length > 0) {
+    <div class="services-grid">
+      @for (service of services; track service.id) {
+
+        <mat-card class="service-card">
+
+          <img mat-card-image
+               [src]="getImageUrl(service)"
+               [alt]="service.title ?? 'Service image'"
+               class="card-image" />
+
+          <mat-card-content>
+
+            <div class="card-category">
+              <mat-icon>build_circle</mat-icon>
+              {{ formatCategory(service.category ?? '') }}
+            </div>
+
+            <h3 class="card-title">{{ service.title }}</h3>
+
+            <p class="card-description">{{ service.description }}</p>
+
+            <div class="card-meta">
+              <span class="meta-item">
+                <mat-icon>location_on</mat-icon>
+                {{ service.city ?? 'N/A' }}
+              </span>
+              <span class="card-budget">
+                {{ formatBudget(service.budget) }}
+              </span>
+            </div>
+
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-flat-button color="primary" class="full-width">
+              View Details
+            </button>
+          </mat-card-actions>
+
+        </mat-card>
+
+      }
+    </div>
+  }
+
+</div>

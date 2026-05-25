@@ -1,4 +1,4 @@
-// @ts-ignore
+
 import {HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
 import {AuthFacade} from '../services/auth-facade';
